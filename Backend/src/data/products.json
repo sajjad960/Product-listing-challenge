@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Wooden Table",
+    "price": 120.0,
+    "quantity": 10
+  },
+  {
+    "id": 2,
+    "name": "Wooden Chair",
+    "price": 45.0,
+    "quantity": 20
+  },
+  {
+    "id": 3,
+    "name": "Wooden Desk",
+    "price": 250.0,
+    "quantity": 5
+  },
+  {
+    "id": 4,
+    "name": "Wooden Shelf",
+    "price": 80.0,
+    "quantity": 15
+  },
+  {
+    "id": 5,
+    "name": "Wooden Bed Frame",
+    "price": 300.0,
+    "quantity": 8
+  },
+  {
+    "id": 6,
+    "name": "Wooden Dresser",
+    "price": 150.0,
+    "quantity": 10
+  },
+  {
+    "id": 7,
+    "name": "Wooden Cabinet",
+    "price": 200.0,
+    "quantity": 6
+  },
+  {
+    "id": 8,
+    "name": "Wooden Coffee Table",
+    "price": 90.0,
+    "quantity": 12
+  },
+  {
+    "id": 9,
+    "name": "Wooden Nightstand",
+    "price": 60.0,
+    "quantity": 18
+  },
+  {
+    "id": 10,
+    "name": "Wooden Bench",
+    "price": 110.0,
+    "quantity": 7
+  }
+]

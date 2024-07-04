@@ -9,11 +9,15 @@ import {
   LinkText,
 } from "./styles/authStyles";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const Login = () => {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [error, setError] = useState<string>();
+  const auth = useSelector((state: RootState) => state.auth);
+  console.log(auth);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

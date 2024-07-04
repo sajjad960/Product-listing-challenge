@@ -4,9 +4,9 @@ import ApiMethods from "../api/ApiMethods";
 import { ApiBaseUrl } from "../utils/ApiBaseUrl";
 
 interface UseApiProps {
-  formData: boolean;
+  formData?: boolean;
 }
-export default function useApi({ formData }: UseApiProps) {
+export default function useApi({ formData = false }: UseApiProps) {
   const { authToken } = useAuthToken();
 
   return useMemo(

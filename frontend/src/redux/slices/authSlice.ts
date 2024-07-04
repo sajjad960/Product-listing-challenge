@@ -1,21 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { User } from "../../types";
 
-interface User {
-  name?: string;
-  email: string;
-  password: string;
-}
-
-interface AuthState {
+export interface AuthState {
   user: User | null;
   isLoggedIn: boolean;
   error: string | null;
+  token: string | null;
 }
 
 const initialState: AuthState = {
   user: null,
   isLoggedIn: false,
   error: null,
+  token: null,
 };
 
 const authSlice = createSlice({
@@ -46,12 +43,14 @@ const authSlice = createSlice({
   },
 });
 
+const { actions, reducer } = authSlice;
+
 export const {
   loginSuccess,
   loginFailure,
   logout,
   registerSuccess,
   registerFailure,
-} = authSlice.actions;
+} = actions;
 
-export default authSlice.reducer;
+export default reducer;

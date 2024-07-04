@@ -1,14 +1,13 @@
 import { JwtPayload, jwtDecode } from "jwt-decode";
-import { useMemo } from "react";
-import useLocalStorageState from "use-local-storage-state";
+import { useMemo, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const useAuthToken = () => {
-  const [authToken, setAuthToken] = useLocalStorageState(
-    "auth-products-listing",
-    {
-      defaultValue: null,
-    }
-  );
+  const { token } = useSelector((state: RootState) => state.auth);
+  console.log(token);
+
+  const [authToken, setAuthToken] = useState<string | null>(token);
 
   const decode: JwtPayload | null = useMemo(() => {
     return authToken ? jwtDecode(authToken) : null;

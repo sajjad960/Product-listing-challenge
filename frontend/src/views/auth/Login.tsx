@@ -9,15 +9,13 @@ import {
   LinkText,
 } from "./styles/authStyles";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import useApi from "../../hooks/useApi";
 
 const Login = () => {
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
-  const [error, setError] = useState<string>();
-  const auth = useSelector((state: RootState) => state.auth);
-  console.log(auth);
+  const api = useApi();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,6 +26,9 @@ const Login = () => {
       // Handle login logic here
       console.log("Email:", email);
       console.log("Password:", password);
+
+      const loginResponse = api.login({ email, password });
+      console.log(loginResponse);
     }
   };
 

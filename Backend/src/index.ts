@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import { config } from './config/config'
+import cors from 'cors'
 import globalErrorHandler from './adapters/primary/http/controllers/ErrorController'
 import logRequests from './adapters/primary/http/middleware/logRequests'
 import userRouter from './adapters/primary/http/routes/userRoutes'
@@ -11,6 +12,11 @@ const app = express()
 app.use(express.json())
 
 dotenv.config()
+app.use(
+  cors({
+    origin: '*',
+  })
+)
 
 // Logging Requests Middleware
 app.use(logRequests)

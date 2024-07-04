@@ -3,22 +3,19 @@ import useAuthToken from "./auth/useAuthToken";
 import ApiMethods from "../api/ApiMethods";
 import { ApiBaseUrl } from "../utils/ApiBaseUrl";
 
-interface UseApiProps {
-  formData?: boolean;
-}
-export default function useApi({ formData = false }: UseApiProps) {
+export default function useApi(formdata?: boolean) {
   const { authToken } = useAuthToken();
 
   return useMemo(
     () =>
       new ApiMethods({
         baseURL: ApiBaseUrl,
-        formData,
+        formData: formdata ?? false,
         commonHeaders: authToken
           ? { Authorization: `Bearer ${authToken}` }
           : {},
-        timeout: 60000,
+        timeout: 4000,
       }),
-    [authToken, formData]
+    [authToken, formdata]
   );
 }

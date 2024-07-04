@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import { config } from './config/config'
 import globalErrorHandler from './adapters/primary/http/controllers/ErrorController'
 import logRequests from './adapters/primary/http/middleware/logRequests'
+import userRouter from './adapters/primary/http/routes/userRoutes'
 
 const app = express()
 
@@ -13,8 +14,8 @@ dotenv.config()
 // Logging Requests Middleware
 app.use(logRequests)
 
-// const prefix = '/api/v1'
-// app.use(`${prefix}/users`, userRouter)
+const prefix = '/api/v1'
+app.use(`${prefix}/users`, userRouter)
 // app.use(`${prefix}/books`, bookRouter)
 
 //handling global error

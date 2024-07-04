@@ -68,7 +68,7 @@ export class Auth {
       // genarate Token
       token = createJwtToken(user)
     } else {
-      throw new AppError('Invalid credentials', httpStatus.BAD_REQUEST)
+      throw new AppError('User not found', httpStatus.NOT_FOUND)
     }
 
     const copiedUser = this.makeCopiedUser(user)
@@ -76,5 +76,5 @@ export class Auth {
     return { user: userView, token }
   }
 }
-const authInstance = new Auth()
-export default authInstance
+const AuthInstance = new Auth()
+export default AuthInstance

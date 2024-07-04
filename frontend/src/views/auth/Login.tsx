@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Form,
@@ -8,35 +8,52 @@ import {
   Error,
   LinkText,
 } from "./styles/authStyles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useApi from "../../hooks/useApi";
+import { LoginResponse } from "../../types";
+import { AppDispatch, RootState } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { loginFailure, loginSuccess } from "../../redux/slices/authSlice";
 
 const Login = () => {
   const api = useApi();
+  const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //redux
+  const dispatch: AppDispatch = useDispatch();
+  const { loginError, isLoggedIn } = useSelector(
+    (state: RootState) => state.auth
+  );
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email || !password) {
-      setError("Please fill in all fields");
+      dispatch(loginFailure("Please fill in all fields"));
     } else {
-      setError("");
-      // Handle login logic here
-      console.log("Email:", email);
-      console.log("Password:", password);
-
-      const loginResponse = api.login({ email, password });
-      console.log(loginResponse);
+      try {
+        const loginResponse: LoginResponse = await api.login({
+          email,
+          password,
+        });
+        console.log(loginResponse);
+        dispatch(loginSuccess(loginResponse));
+      } catch (error) {
+        dispatch(loginFailure((error as { message: string }).message));
+      }
     }
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
         <Title>Login</Title>
-        {error && <Error>{error}</Error>}
+        {loginError && <Error>{loginError}</Error>}
         <Input
           type="email"
           placeholder="Email"

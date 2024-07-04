@@ -5,8 +5,11 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f0f2f5;
+  padding: 5rem;
+  padding-top: 0rem;
+  background: white;
+  max-width: fit-content;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
 export const Title = styled.h1`
@@ -15,10 +18,28 @@ export const Title = styled.h1`
 `;
 
 export const JsonContainer = styled.pre`
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  overflow: auto;
+  color: #000;
+`;
+
+export const Button = styled.button`
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    background-color: #004080;
+  }
 `;

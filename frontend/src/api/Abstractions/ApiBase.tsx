@@ -29,30 +29,9 @@ export default class ApiBase {
     this.axiosClient.interceptors.response.use(
       (response) => response,
       (error) => {
-        const errorData = error.response?.data ?? {};
-        console.log("this is an error", error);
+        const errorData = error?.response?.data ?? {};
 
-        if (error.response) {
-          const statusCode = error.response.status;
-          console.log("error area");
-          switch (statusCode) {
-            case 400:
-              errorData.message = "Bad Request: " + errorData.message;
-              break;
-            case 401:
-              errorData.message = "Unauthorized: " + errorData.message;
-              break;
-            case 403:
-              errorData.message = "Forbidden: " + errorData.message;
-              break;
-            case 404:
-              errorData.message = "Not Found: " + errorData.message;
-              break;
-            // Add more cases as needed
-            default:
-              errorData.message = "Unhandled Error: " + errorData.message;
-          }
-        } else {
+        if (!error?.response) {
           errorData.message = "Network Error: Unable to reach the server.";
         }
         throw errorData;

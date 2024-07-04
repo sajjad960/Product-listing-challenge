@@ -1,17 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../../types";
+import { LoginResponse, RegisterResponse, User } from "../../types";
 
 export interface AuthState {
   user: User | null;
   isLoggedIn: boolean;
-  error: string | null;
+  loginError: string | null;
+  registerError: string | null;
   token: string | null;
 }
 
 const initialState: AuthState = {
   user: null,
   isLoggedIn: false,
-  error: null,
+  loginError: null,
+  registerError: null,
   token: null,
 };
 
@@ -19,26 +21,29 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    loginSuccess: (state, action: PayloadAction<User>) => {
-      state.user = action.payload;
+    loginSuccess: (state, action: PayloadAction<LoginResponse>) => {
+      state.user = action.payload.user;
       state.isLoggedIn = true;
-      state.error = null;
+      state.loginError = null;
+      state.token = action.payload.token;
     },
     loginFailure: (state, action: PayloadAction<string>) => {
-      state.error = action.payload;
+      state.loginError = action.payload;
     },
     logout: (state) => {
       state.user = null;
       state.isLoggedIn = false;
-      state.error = null;
+      state.loginError = null;
+      state.token = null;
     },
-    registerSuccess: (state, action: PayloadAction<User>) => {
-      state.user = action.payload;
+    registerSuccess: (state, action: PayloadAction<RegisterResponse>) => {
+      state.user = action.payload.user;
       state.isLoggedIn = true;
-      state.error = null;
+      state.registerError = null;
+      state.token = action.payload.token;
     },
     registerFailure: (state, action: PayloadAction<string>) => {
-      state.error = action.payload;
+      state.registerError = action.payload;
     },
   },
 });

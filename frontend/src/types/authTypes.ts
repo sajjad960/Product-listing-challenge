@@ -7,7 +7,7 @@ export type RegisterParams = {
 };
 
 export type RegisterResponse = {
-  token: React.SetStateAction<null>;
+  token: string;
   status: string;
   user: User;
 };
@@ -18,7 +18,7 @@ export type LoginParams = {
 };
 
 export type LoginResponse = {
-  token: React.SetStateAction<null>;
+  token: string;
   status: string;
   user: User;
 };

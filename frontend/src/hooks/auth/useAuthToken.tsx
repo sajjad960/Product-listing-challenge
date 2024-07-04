@@ -5,7 +5,6 @@ import { RootState } from "../../redux/store";
 
 const useAuthToken = () => {
   const { token } = useSelector((state: RootState) => state.auth);
-  console.log(token);
 
   const [authToken, setAuthToken] = useState<string | null>(token);
 

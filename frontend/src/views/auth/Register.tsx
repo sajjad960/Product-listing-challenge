@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Form,
@@ -8,32 +8,53 @@ import {
   Error,
   LinkText,
 } from "./styles/authStyles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import { registerFailure, registerSuccess } from "../../redux/slices/authSlice";
+import useApi from "../../hooks/useApi";
+import { RegisterResponse } from "../../types";
 
 const Register = () => {
-  const [name, setName] = useState<string>();
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
-  const [error, setError] = useState<string>();
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const api = useApi();
+  const navigate = useNavigate();
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  //redux
+  const dispatch: AppDispatch = useDispatch();
+  const { registerError, isLoggedIn } = useSelector(
+    (state: RootState) => state.auth
+  );
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!name || !email || !password) {
-      setError("Please fill in all fields");
+    if (!email || !password) {
+      dispatch(registerFailure("Please fill in all fields"));
     } else {
-      setError("");
-      // Handle registration logic here
-      console.log("Name:", name);
-      console.log("Email:", email);
-      console.log("Password:", password);
+      try {
+        const registerResponse: RegisterResponse = await api.register({
+          name,
+          email,
+          password,
+        });
+        dispatch(registerSuccess(registerResponse));
+      } catch (error) {
+        dispatch(registerFailure((error as { message: string }).message));
+      }
     }
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
         <Title>Register</Title>
-        {error && <Error>{error}</Error>}
+        {registerError && <Error>{registerError}</Error>}
         <Input
           type="text"
           placeholder="Name"

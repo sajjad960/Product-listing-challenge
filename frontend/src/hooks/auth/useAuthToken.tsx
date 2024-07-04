@@ -3,9 +3,12 @@ import { useMemo } from "react";
 import useLocalStorageState from "use-local-storage-state";
 
 const useAuthToken = () => {
-  const [authToken, setAuthToken] = useLocalStorageState("auth-simple-social", {
-    defaultValue: null,
-  });
+  const [authToken, setAuthToken] = useLocalStorageState(
+    "auth-products-listing",
+    {
+      defaultValue: null,
+    }
+  );
 
   const decode: JwtPayload | null = useMemo(() => {
     return authToken ? jwtDecode(authToken) : null;

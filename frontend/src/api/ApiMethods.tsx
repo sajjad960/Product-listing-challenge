@@ -6,7 +6,10 @@ import {
   PostPutMethodProps,
   LoginParams,
   GetDeleteMethodProps,
+  LoginResponse,
+  RegisterResponse,
 } from "../types";
+import { GetAllProductsResponce } from "../types/productTypes";
 
 export default class ApiMethods extends ApiBase {
   constructor(props: ConstructorProps) {
@@ -20,7 +23,7 @@ export default class ApiMethods extends ApiBase {
       fullResponse: false,
       others: undefined,
     };
-    const resultData = await this.post(passingData);
+    const resultData: RegisterResponse = await this.post(passingData);
     return resultData;
   }
   async login(data: LoginParams) {
@@ -30,7 +33,7 @@ export default class ApiMethods extends ApiBase {
       fullResponse: false,
       others: undefined,
     };
-    const resultData = await this.post(passingData);
+    const resultData: LoginResponse = await this.post(passingData);
     return resultData;
   }
 
@@ -41,7 +44,7 @@ export default class ApiMethods extends ApiBase {
       fullResponse: false,
       others: undefined,
     };
-    const resultData = await this.get(passingData);
+    const resultData: GetAllProductsResponce = await this.get(passingData);
     return resultData;
   }
 }

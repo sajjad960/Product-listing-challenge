@@ -17,10 +17,18 @@ export const Title = styled.h1`
   color: #333;
 `;
 
+export const Loading = styled.h1`
+  font-size: 1rem;
+  color: #131010;
+`;
+
 export const JsonContainer = styled.pre`
   color: #000;
 `;
-
+export const Error = styled.div`
+  color: red;
+  margin-bottom: 1rem;
+`;
 export const Button = styled.button`
   padding: 10px 20px;
   font-size: 16px;

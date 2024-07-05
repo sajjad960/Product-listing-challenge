@@ -8,9 +8,6 @@ COPY package.json pnpm-lock.yaml ./
 RUN npm install -g pnpm
 RUN pnpm install
 
-# Copy environment files
-COPY .env .env
-
 # Copy the rest of the application code
 COPY . .
 

@@ -1,7 +1,5 @@
 ### #Backend
 
-Backend Folder Location (./backend).
-
 #### Architecture
 
 The structure is based on Clean Architecture (aka Ports and Adapters, Hexagonal Architecture).<br>

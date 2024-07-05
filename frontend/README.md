@@ -1,7 +1,5 @@
 ### #Frontend
 
-Frontend Folder Location (./frontend).
-
 #### Prerequisites
 
 - Node.js (version v20.0.0 or higher)

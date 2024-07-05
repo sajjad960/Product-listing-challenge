@@ -21,6 +21,7 @@ const Register = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   //redux
   const dispatch: AppDispatch = useDispatch();
   const { registerError, isLoggedIn } = useSelector(
@@ -28,8 +29,10 @@ const Register = () => {
   );
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     if (!email || !password) {
       dispatch(registerFailure("Please fill in all fields"));
+      setIsLoading(false);
     } else {
       try {
         const registerResponse: RegisterResponse = await api.register({
@@ -38,8 +41,10 @@ const Register = () => {
           password,
         });
         dispatch(registerSuccess(registerResponse));
+        setIsLoading(false);
       } catch (error) {
         dispatch(registerFailure((error as { message: string }).message));
+        setIsLoading(false);
       }
     }
   };
@@ -73,7 +78,11 @@ const Register = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button type="submit">Register</Button>
+        {isLoading ? (
+          <Button disabled>Loading...</Button>
+        ) : (
+          <Button type="submit">Register</Button>
+        )}
         <LinkText>
           Already have an account? <Link to="/login">Login here</Link>
         </LinkText>

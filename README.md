@@ -73,7 +73,7 @@ npm install -g pnpm
 pnpm install
 ```
 
-3. Setup environment variables:
+3. Setup environment variables:<br>
    Copy `.env.example` to `.env`.
 4. Start app
 

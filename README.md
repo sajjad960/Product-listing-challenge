@@ -87,5 +87,18 @@ Local address of the frontend app will be `http://localhost:5173` (if this port 
 
 #### Prerequisites
 
-- Node.js (version v20.0.0 or higher)
-- pnpm (version 9.0.0 or higher)
+- Docker
+- Docker Compose
+
+#### Running the Applications
+
+1. Build and start the Docker containers:
+
+```bash
+docker-compose up --build
+```
+
+2. Access the applications:
+
+- Frontend: Open your browser and navigate to http://localhost:5173
+- Backend: The backend server is running on http://localhost:8008

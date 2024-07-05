@@ -17,7 +17,8 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "8008:8008"
     environment:
       - NODE_ENV=development
-      - PORT=8008
+      - JWT_SECRET=secret
+      - JWT_EXPIRES_IN=1d
